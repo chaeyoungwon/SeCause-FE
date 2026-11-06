@@ -1,8 +1,10 @@
 'use client';
 
+import { ExternalLink } from 'lucide-react';
 import { useState } from 'react';
 
 import { type GetUserResponse, useUser, useWithdraw } from '@/features/auth';
+import { GITHUB_OAUTH_APP_SETTINGS_URL } from '@/shared/config/github';
 import Button from '@/shared/ui/Button';
 import ConfirmDialog from '@/shared/ui/ConfirmDialog';
 import { useToast } from '@/shared/ui/Toast';
@@ -34,13 +36,13 @@ export default function AccountTab({ initialUser, isHydrated }: Props) {
 
       <div className="bg-surface border-border-subtle overflow-hidden rounded-3xl border shadow-[0_18px_50px_rgba(27,43,75,0.05)]">
         <div className="p-5 md:p-6">
-          <h2 className="text-heading-md text-foreground mb-5">프로필</h2>
+          <h2 className="text-label-lg text-foreground mb-4">프로필</h2>
           <ProfileForm user={user} />
         </div>
 
         <div className="border-border-subtle flex flex-col items-start gap-4 border-t p-5 sm:flex-row sm:items-center sm:justify-between md:px-6">
           <div>
-            <h2 className="text-heading-md text-foreground">화면 테마</h2>
+            <h2 className="text-label-lg text-foreground">화면 테마</h2>
             <p className="text-body-md text-foreground-secondary mt-1">
               라이트 또는 다크 모드를 선택하세요.
             </p>
@@ -48,9 +50,27 @@ export default function AccountTab({ initialUser, isHydrated }: Props) {
           <ThemeToggle showLabel />
         </div>
 
+        <div className="border-border-subtle flex flex-col items-start gap-4 border-t p-5 sm:flex-row sm:items-center sm:justify-between md:px-6">
+          <div>
+            <h2 className="text-label-lg text-foreground">GitHub 연동</h2>
+            <p className="text-body-md text-foreground-secondary mt-1">
+              분석할 조직의 접근 권한을 GitHub에서 추가하거나 요청할 수 있습니다.
+            </p>
+          </div>
+          <a
+            href={GITHUB_OAUTH_APP_SETTINGS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-label-lg border-border-default text-foreground hover:bg-surface-muted inline-flex shrink-0 items-center gap-1.5 rounded-lg border px-4 py-2 transition-colors"
+          >
+            GitHub 연동 관리
+            <ExternalLink size={14} aria-hidden="true" />
+          </a>
+        </div>
+
         <div className="border-border-subtle border-t p-5 md:p-6">
-          <h2 className="text-heading-md text-foreground mb-4">계정 삭제</h2>
-          <p className="text-body-lg text-foreground-secondary mb-4">
+          <h2 className="text-label-lg text-foreground">계정 삭제</h2>
+          <p className="text-body-md text-foreground-secondary mt-1 mb-4">
             계정을 삭제하면 모든 분석 기록과 계정 데이터가 영구적으로 삭제됩니다.
           </p>
           <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
